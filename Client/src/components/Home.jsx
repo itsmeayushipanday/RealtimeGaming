@@ -1,8 +1,7 @@
-import React from "react";
 import { io } from "socket.io-client";
 
 const Home = () => {
-  const socket = io("https://server-domain.com");
+  const socket = io("http://localhost:3000/");
   socket.on("connect", () => {
     console.log(socket.id); // x8WIv7-mJelg7on_ALbx
   });
@@ -10,7 +9,8 @@ const Home = () => {
   socket.on("disconnect", () => {
     console.log(socket.id); // undefined
   });
-  return <div></div>;
+
+  return <div>Hello</div>;
 };
 
 export default Home;
