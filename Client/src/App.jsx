@@ -1,5 +1,11 @@
+import Home from "./components/Home";
+
 function App() {
-  return <h1 className="font-bold">hello</h1>;
+  return (
+    <div>
+      <Home />
+    </div>
+  );
 }
 
 export default App;
