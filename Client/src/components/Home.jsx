@@ -35,13 +35,28 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-blue-950 text-white h-screen text-center">
-      <div>
-        Welcome
-        <Button onClick={createRoomHandler} variant="contained" size="large">
+    <div className="bg-blue-950 text-white h-screen flex flex-col items-center justify-center">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold">
+          Welcome to online gaming platform🎮
+        </h1>
+      </div>
+      <div className="space-y-4">
+        <Button
+          onClick={createRoomHandler}
+          variant="contained"
+          size="large"
+          className="w-52"
+        >
           Create Room
         </Button>
-        <Button onClick={joinRoomHandler} variant="contained" size="large">
+        <div className="h-4"></div>
+        <Button
+          onClick={joinRoomHandler}
+          variant="contained"
+          size="large"
+          className="w-52"
+        >
           Join Room
         </Button>
       </div>
