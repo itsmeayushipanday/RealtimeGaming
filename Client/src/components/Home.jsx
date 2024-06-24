@@ -1,5 +1,7 @@
 import React from "react";
 import { io } from "socket.io-client";
+import Createroom from "./Createroom";
+import Joinroom from "./Joinroom";
 
 const Home = () => {
   const socket = io("https://server-domain.com");
@@ -10,7 +12,15 @@ const Home = () => {
   socket.on("disconnect", () => {
     console.log(socket.id); // undefined
   });
-  return <div></div>;
+  return (
+    <div className="bg-blue-950 text-white h-screen text-center">
+      <div>
+        Welcome
+        <Createroom />
+        <Joinroom />
+      </div>
+    </div>
+  );
 };
 
 export default Home;
