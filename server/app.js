@@ -33,6 +33,22 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
 
+  socket.on("join", (roomName) => {
+    console.log("Joining a room....");
+    let rooms = io.sockets.adapter.rooms;
+    let room = rooms.get(roomName);
+
+    if (room == undefined) {
+      socket.join(roomName);
+      socket.emit("created", "New Room Created");
+    } else if (room.size == 1) {
+      socket.join(roomName);
+      socket.emit("joined", "You joined a room");
+    } else {
+      socket.emit("full", "This room is full");
+    }
+  });
+
   socket.on("disconnect", () => {
     console.log("Client disconnected:", socket.id);
   });
