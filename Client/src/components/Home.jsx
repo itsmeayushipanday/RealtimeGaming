@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
-import Createroom from "./Createroom";
-import Joinroom from "./Joinroom";
+import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
   const socket = io("http://localhost:3000/");
@@ -11,20 +11,30 @@ const Home = () => {
   socket.on("disconnect", () => {
     console.log(socket.id); // undefined
   });
-<<<<<<< HEAD
+
+  const navigate = useNavigate();
+
+  const createRoomHandler = () => {
+    navigate("/createRoom");
+  };
+
+  const joinRoomHandler = () => {
+    navigate("/joinRoom");
+  };
+
   return (
     <div className="bg-blue-950 text-white h-screen text-center">
       <div>
         Welcome
-        <Createroom />
-        <Joinroom />
+        <Button onClick={createRoomHandler} variant="contained" size="large">
+          Create Room
+        </Button>
+        <Button onClick={joinRoomHandler} variant="contained" size="large">
+          Join Room
+        </Button>
       </div>
     </div>
   );
-=======
-
-  return <div>Hello</div>;
->>>>>>> dccfe4dedecff1514998941813db87b0e5977557
 };
 
 export default Home;

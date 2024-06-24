@@ -1,7 +1,10 @@
-import React from "react";
-
 const Joinroom = () => {
-  return <div></div>;
+  return (
+    <div>
+      <input type="text" />
+      <button>Submit</button>
+    </div>
+  );
 };
 
 export default Joinroom;
