@@ -1,7 +1,7 @@
 const Createroom = () => {
   return (
-    <div>
-      <h1>this is your id</h1>
+    <div className="bg-blue-950 h-screen">
+      <h1 className="text-white text-center">This is your id</h1>
     </div>
   );
 };
