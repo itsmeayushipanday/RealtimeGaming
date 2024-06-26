@@ -1,6 +1,7 @@
 import { io } from "socket.io-client";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import "animate.css";
 
 const Home = () => {
   const socket = io("http://localhost:3000/");
@@ -35,13 +36,31 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-blue-950 text-white h-screen flex flex-col items-center justify-center">
-      <div className="text-center mb-8">
-        <h1 className="text-4xl font-bold">
-          Welcome to online gaming platform🎮
+    <div
+      className="bg-cover bg-center text-white h-screen flex flex-col items-center justify-center"
+      style={{
+        backgroundImage:
+          "url(https://images.pexels.com/photos/3165335/pexels-photo-3165335.jpeg)",
+      }}
+    >
+      {/* <div className="text-center mb-8 bg-black bg-opacity-50 p-4 rounded">
+        <h1 className="text-5xl font-bold bounce-in fade-in color-change">
+          WELCOME TO ONLINE{" "}
+          <span className="font-serif text-6xl no-fade">GAMING</span> PLATFORM
+        </h1>
+      </div> */}
+      <div className="text-center mb-8 bg-black bg-opacity-50 p-4 rounded relative">
+        <h1 className="text-5xl font-bold bounce-in fade-in color-change">
+          WELCOME TO ONLINE
+        </h1>
+        <h1 className="text-6xl font-serif bounce-in fade-in color-change">
+          GAMING
+        </h1>
+        <h1 className="text-5xl font-bold bounce-in fade-in color-change">
+          PLATFORM
         </h1>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-4 bg-black bg-opacity-50 p-4 rounded">
         <Button
           onClick={createRoomHandler}
           variant="contained"

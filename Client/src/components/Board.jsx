@@ -41,7 +41,7 @@ const Board = () => {
   } else if (isBoardEmpty) {
     status = "Begin the game with X player chance";
   } else if (isBoardFull) {
-    status = "Match Draw";
+    status = "Game Draw";
   } else {
     status = "Next Chance is of player: " + (xIsNext ? "X" : "0");
   }

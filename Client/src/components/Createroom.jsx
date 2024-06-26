@@ -24,28 +24,30 @@ const Createroom = () => {
       setId("");
     }
   };
-
   return (
-    <div className="bg-blue-950 h-screen flex flex-col items-center justify-center">
-      <input
-        type="text"
-        value={roomName}
-        onChange={handleInputChange}
-        placeholder="Enter your Room Name"
-        className="w-52 h-14 mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      {error && (
-        <p className="text-red-500 mb-5 font-semibold">Room Name is required</p>
-      )}
-      <Button
-        variant="contained"
-        size="large"
-        className="mt-4"
-        onClick={idGenerateHandler}
-      >
-        Create Room
-      </Button>
-      {id && roomName && <p className="mt-4 text-white font-serif">{id}</p>}
+    <div
+      className="bg-cover bg-center text-white h-screen flex flex-col items-center justify-center"
+      style={{
+        backgroundImage:
+          "url(https://wallpapers.com/images/hd/best-gaming-background-37l6eubhbp4bthp9.jpg)",
+      }}
+    >
+      <div className="bg-black bg-opacity-50 p-8 rounded-md text-center">
+        <input
+          type="text"
+          value={roomName}
+          onChange={handleInputChange}
+          placeholder="Enter your Room Name"
+          className="mr-2 w-52 h-14 mb-4 px-4 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {error && (
+          <p className="text-red-500 mb-5 font-medium">Room Name is required</p>
+        )}
+        <Button variant="contained" size="large" onClick={idGenerateHandler}>
+          Create Room
+        </Button>
+        {id && roomName && <p className="mt-4 text-white font-serif">{id}</p>}
+      </div>
     </div>
   );
 };

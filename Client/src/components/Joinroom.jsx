@@ -25,28 +25,36 @@ const Joinroom = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-blue-950">
-      <input
-        type="text"
-        value={gameid}
-        onChange={inputChange}
-        placeholder="Enter your game ID"
-        className="mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      />
-      {err && (
-        <p className="text-red-500 mb-5 font-semibold">
-          Please enter a valid game id
-        </p>
-      )}
-      <button
-        className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-        onClick={submitHandler}
-      >
-        Submit
-      </button>
-      {idGenerate && gameid && (
-        <p className="mt-4 text-white font-serif">{idGenerate}</p>
-      )}
+    <div
+      className="flex flex-col items-center justify-center min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage:
+          "url(https://wallpapers.com/images/hd/best-gaming-background-37l6eubhbp4bthp9.jpg)",
+      }}
+    >
+      <div className="bg-black bg-opacity-50 p-8 rounded-md text-center">
+        <input
+          type="text"
+          value={gameid}
+          onChange={inputChange}
+          placeholder="Enter your game ID"
+          className="mr-2 mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        {err && (
+          <p className="text-red-500 mb-5 font-medium">
+            Please enter a valid game ID
+          </p>
+        )}
+        <button
+          className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
+          onClick={submitHandler}
+        >
+          Submit
+        </button>
+        {idGenerate && gameid && (
+          <p className="mt-4 text-white font-serif">{idGenerate}</p>
+        )}
+      </div>
     </div>
   );
 };
