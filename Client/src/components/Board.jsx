@@ -60,24 +60,34 @@ const Board = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center justify-between pt-56">
-        <div className="bg-green-600 font-medium text-white px-4 py-2 rounded-full inline-block">
+      <div
+        className="min-h-screen flex flex-col items-center justify-center bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://images.pexels.com/photos/268976/pexels-photo-268976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
+        }}
+      >
+        <div className="text-2xl px-8 py-4 rounded-tl-2xl rounded-br-2xl font-serif text-white inline-block mb-4 bg-customOrange hover:bg-[#ffaf10]">
           {status}
         </div>
-        <div className="flex space-x-2">
-          <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
-          <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
-          <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
-        </div>
-        <div className="flex space-x-2">
-          <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
-          <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
-          <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
-        </div>
-        <div className="flex space-x-2">
-          <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
-          <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
-          <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+        <div className="bg-[#D8AA89] p-4 rounded-lg">
+          <div className="flex flex-col items-center space-y-2">
+            <div className="flex space-x-2">
+              <Square value={squares[0]} onSquareClick={() => handleClick(0)} />
+              <Square value={squares[1]} onSquareClick={() => handleClick(1)} />
+              <Square value={squares[2]} onSquareClick={() => handleClick(2)} />
+            </div>
+            <div className="flex space-x-2">
+              <Square value={squares[3]} onSquareClick={() => handleClick(3)} />
+              <Square value={squares[4]} onSquareClick={() => handleClick(4)} />
+              <Square value={squares[5]} onSquareClick={() => handleClick(5)} />
+            </div>
+            <div className="flex space-x-2">
+              <Square value={squares[6]} onSquareClick={() => handleClick(6)} />
+              <Square value={squares[7]} onSquareClick={() => handleClick(7)} />
+              <Square value={squares[8]} onSquareClick={() => handleClick(8)} />
+            </div>
+          </div>
         </div>
       </div>
     </>
