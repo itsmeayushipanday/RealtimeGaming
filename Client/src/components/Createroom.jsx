@@ -6,21 +6,21 @@ const Createroom = () => {
   const [id, setId] = useState("");
   const [roomName, setRoomName] = useState("");
   const [error, setError] = useState(false);
-  // const [socket, setSocket] = useState();
+  const [socket, setSocket] = useState();
 
-  // useEffect(() => {
-  //   const socket = io("http://localhost:3000/");
-  //   setSocket(socket);
-  // }, []);
+  useEffect(() => {
+    const socket = io("http://localhost:3000/");
+    setSocket(socket);
+  }, []);
 
   const idGenerateHandler = (e) => {
     e.preventDefault();
     if (roomName.trim() !== "") {
       setError(false);
-      // socket.emit("createRoom", roomName);
-      // socket.on("roomIdCreated", (roomID) => {
-      //   setId(roomID);
-      // });
+      socket.emit("createRoom", roomName);
+      socket.on("roomIdCreated", (roomID) => {
+        setId(roomID);
+      });
     } else {
       setError(true);
     }
