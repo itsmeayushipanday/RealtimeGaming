@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 const Joinroom = () => {
   const [gameid, setGameid] = useState("");
   const [err, setErr] = useState(false);
   const [idGenerate, setIdGenerate] = useState("");
+  const [socket, setSocket] = useState("");
 
-  const submitHandler = () => {
+  useEffect(() => {
+    const socket = io("http://localhost:3000/");
+    setSocket(socket);
+  }, []);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
     if (gameid.trim() !== "") {
-      setIdGenerate("Your game id is generated");
+      socket.emit("joinRoom", gameid);
       setErr(false);
+      setIdGenerate("You joined a room");
     } else {
       setErr(true);
     }

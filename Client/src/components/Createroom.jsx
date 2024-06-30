@@ -1,21 +1,33 @@
 import { Button } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
 const Createroom = () => {
   const [id, setId] = useState("");
   const [roomName, setRoomName] = useState("");
   const [error, setError] = useState(false);
+  // const [socket, setSocket] = useState();
 
-  const idGenerateHandler = () => {
+  // useEffect(() => {
+  //   const socket = io("http://localhost:3000/");
+  //   setSocket(socket);
+  // }, []);
+
+  const idGenerateHandler = (e) => {
+    e.preventDefault();
     if (roomName.trim() !== "") {
-      setId("Id Created");
       setError(false);
+      // socket.emit("createRoom", roomName);
+      // socket.on("roomIdCreated", (roomID) => {
+      //   setId(roomID);
+      // });
     } else {
       setError(true);
     }
   };
 
   const handleInputChange = (e) => {
+    e.preventDefault();
     setRoomName(e.target.value);
     if (error && roomName.trim() !== "") {
       setError(false);
@@ -46,7 +58,9 @@ const Createroom = () => {
         <Button variant="contained" size="large" onClick={idGenerateHandler}>
           Create Room
         </Button>
-        {id && roomName && <p className="mt-4 text-white font-serif">{id}</p>}
+        {id && roomName && (
+          <p className="mt-4 text-white font-serif">Room Id: {id}</p>
+        )}
       </div>
     </div>
   );
