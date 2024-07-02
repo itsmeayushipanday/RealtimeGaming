@@ -9,6 +9,7 @@ const Createroom = () => {
   const [socket, setSocket] = useState();
 
   useEffect(() => {
+    //ESTABLISHING A SOCKET CONNECTION
     const socket = io("http://localhost:3000/");
     setSocket(socket);
   }, []);

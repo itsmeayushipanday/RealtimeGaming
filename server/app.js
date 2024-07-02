@@ -2,6 +2,7 @@ const express = require("express");
 const { createServer } = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
+const { generateRandomId } = require("./helper.js");
 
 const app = express();
 
@@ -33,20 +34,25 @@ const io = new Server(httpServer, {
 io.on("connection", (socket) => {
   console.log("New client connected:", socket.id);
 
-  socket.on("join", (roomName) => {
-    console.log("Joining a room....");
-    let rooms = io.sockets.adapter.rooms;
-    let room = rooms.get(roomName);
+  //FOR CREATING A NEW ROOM
+  socket.on("createRoom", (msg) => {
+    const roomId = generateRandomId();
+    socket.join(roomId);
+    socket.emit("roomIdCreated", roomId);
+  });
 
-    if (room == undefined) {
-      socket.join(roomName);
-      socket.emit("created", "New Room Created");
-    } else if (room.size == 1) {
-      socket.join(roomName);
-      socket.emit("joined", "You joined a room");
+  //FOR JOINING A ROOM
+  socket.on("joinRoom", (roomId) => {
+    const rooms = io.of("/").adapter.rooms;
+    const isRoomIdPresent = rooms.has(roomId);
+
+    if (isRoomIdPresent) {
+      socket.join(roomId);
     } else {
-      socket.emit("full", "This room is full");
+      console.log("No such room exits");
     }
+
+    console.log(rooms);
   });
 
   socket.on("disconnect", () => {
