@@ -1,6 +1,7 @@
-import { Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const Createroom = () => {
   const [id, setId] = useState("");
@@ -54,11 +55,19 @@ const Createroom = () => {
           className="mr-2 w-52 h-14 mb-4 px-4 py-2 border text-black border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         {error && (
-          <p className="text-red-500 mb-5 font-medium">Room Name is required</p>
+          <Stack sx={{ width: "100%", mt: 2 }} spacing={2}>
+            <Alert severity="error">
+              <h3 className="font-serif">Room Name is required</h3>
+            </Alert>
+          </Stack>
         )}
-        <Button variant="contained" size="large" onClick={idGenerateHandler}>
+        <button
+          onClick={idGenerateHandler}
+          className="px-8 py-2 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200 mt-4"
+        >
           Create Room
-        </Button>
+        </button>
+
         {id && roomName && (
           <p className="mt-4 text-white font-serif">Room Id: {id}</p>
         )}
