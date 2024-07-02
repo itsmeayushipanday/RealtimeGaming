@@ -4,6 +4,7 @@ import Square from "./Square";
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
+  const [gameStarted, setGameStarted] = useState(false); // game not started yet
 
   function calculateWinner(squares) {
     const lines = [
@@ -23,7 +24,7 @@ const Board = () => {
         squares[a] === squares[b] &&
         squares[a] === squares[c]
       ) {
-        return squares[a]; // return "X" or "0" present at squares[a]
+        return squares[a];
       }
     }
     return null;
@@ -35,28 +36,24 @@ const Board = () => {
   const isBoardEmpty = squares.every((square) => square === null); //checks if each square is empty
   const isBoardFull = squares.every((square) => square !== null); //checks if each square is full
 
-  let status;
-  if (winner) {
-    status = "Winner is: " + winner;
-  } else if (isBoardEmpty) {
-    status = "Begin the game with X player chance";
-  } else if (isBoardFull) {
-    status = "Game Draw";
-  } else {
-    status = "Next Chance is of player: " + (xIsNext ? "X" : "0");
-  }
-
   function handleClick(i) {
-    if (squares[i] || calculateWinner(squares)) return;
+    if (squares[i] || calculateWinner(squares)) return; //means either block is already filled or winner is declared
     const nextSquares = squares.slice(); //creates shallow copy of array
     if (xIsNext) {
       nextSquares[i] = "X";
     } else {
-      nextSquares[i] = "0";
+      nextSquares[i] = "O";
     }
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
+    setGameStarted(true);
   }
+
+  const resetHandler = () => {
+    setSquares(Array(9).fill(null));
+    setXIsNext(true);
+    setGameStarted(false); // game started again
+  };
 
   return (
     <>
@@ -67,9 +64,47 @@ const Board = () => {
             "url('https://images.pexels.com/photos/268976/pexels-photo-268976.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
         }}
       >
-        <div className="text-2xl px-8 py-4 rounded-tl-2xl rounded-br-2xl font-serif text-white inline-block mb-4 bg-customOrange hover:bg-[#ffaf10]">
-          {status}
-        </div>
+        {isBoardEmpty && (
+          <div className="flex space-x-4 mb-4">
+            <button className="bg-[#ffaf10] text-white font-serif text-lg font-bold py-2 px-6 rounded-sm hover:cursor-pointer border-2 border-orange-200">
+              Player X
+            </button>
+            <button className="bg-[#D8AA89] text-white font-serif text-lg font-bold py-2 px-6 rounded-sm hover:cursor-pointer border-2 border-orange-200">
+              Player O
+            </button>
+          </div>
+        )}
+
+        {!isBoardEmpty && !winner && (
+          <div className="flex space-x-4 mb-4">
+            <button
+              className={`bg-[#D8AA89] hover:bg-[#ffaf10] text-white font-serif text-lg font-bold py-2 px-6 rounded-sm hover:cursor-pointer border-2 border-orange-200 ${
+                xIsNext ? "bg-[#ffaf10]" : ""
+              }`}
+            >
+              Player X
+            </button>
+            <button
+              className={`bg-[#D8AA89] hover:bg-[#ffaf10] text-white font-serif text-lg font-bold py-2 px-6 rounded-sm hover:cursor-pointer border-2 border-orange-200 ${
+                !xIsNext ? "bg-[#ffaf10]" : ""
+              }`}
+            >
+              Player 0
+            </button>
+          </div>
+        )}
+
+        {winner && (
+          <button className="bg-customOrange hover:bg-[#ffaf10] text-white font-serif text-lg font-bold py-2 px-6 mt-12 mb-12 rounded-sm hover:cursor-pointer border-2 border-orange-200">
+            Winner is Player : {winner}
+          </button>
+        )}
+        {isBoardFull && (
+          <div className="text-2xl px-8 py-4 rounded-tl-2xl rounded-br-2xl font-serif text-white inline-block mb-4 bg-customOrange hover:bg-[#ffaf10]">
+            Game Draw
+          </div>
+        )}
+
         <div className="bg-[#D8AA89] p-4 rounded-lg">
           <div className="flex flex-col items-center space-y-2">
             <div className="flex space-x-2">
@@ -89,6 +124,12 @@ const Board = () => {
             </div>
           </div>
         </div>
+        <button
+          className="bg-customOrange hover:bg-[#ffaf10] text-white font-serif text-lg font-bold py-2 px-6 mt-12 rounded-sm hover:cursor-pointer border-2 border-orange-200"
+          onClick={resetHandler}
+        >
+          Restart
+        </button>
       </div>
     </>
   );
