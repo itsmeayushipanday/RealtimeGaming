@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const Joinroom = () => {
   const [gameid, setGameid] = useState("");
@@ -50,16 +52,20 @@ const Joinroom = () => {
           className="mr-2 mb-4 px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         {err && (
-          <p className="text-red-500 mb-5 font-medium">
-            Please enter a valid game ID
-          </p>
+          <Stack sx={{ width: "100%", mt: 2 }} spacing={2}>
+            <Alert severity="error">
+              <h3 className="font-serif">Room id is required</h3>
+            </Alert>
+          </Stack>
         )}
+
         <button
-          className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
           onClick={submitHandler}
+          className="px-8 py-2 rounded-full bg-gradient-to-b from-blue-500 to-blue-600 text-white focus:ring-2 focus:ring-blue-400 hover:shadow-xl transition duration-200 mt-4"
         >
-          Submit
+          Join Room
         </button>
+
         {idGenerate && gameid && (
           <p className="mt-4 text-white font-serif">{idGenerate}</p>
         )}
