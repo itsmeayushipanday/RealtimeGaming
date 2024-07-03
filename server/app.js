@@ -56,7 +56,7 @@ io.on("connection", (socket) => {
     }
 
     if (isRoomIdPresent && rooms.get(roomId).size === 2) {
-      io.to(roomId).emit("readyForGame", "Now you can play the game");
+      io.to(roomId).emit("readyForGame", roomId);
     }
   });
 

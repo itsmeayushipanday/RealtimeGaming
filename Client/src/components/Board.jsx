@@ -1,10 +1,14 @@
+/* eslint-disable no-unused-vars */
 import { useState } from "react";
 import Square from "./Square";
+import { useParams } from "react-router-dom";
 
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [gameStarted, setGameStarted] = useState(false); // game not started yet
+
+  const { roomId } = useParams();
 
   function calculateWinner(squares) {
     const lines = [
