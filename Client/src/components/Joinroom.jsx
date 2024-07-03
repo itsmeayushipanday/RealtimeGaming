@@ -18,8 +18,10 @@ const Joinroom = () => {
     e.preventDefault();
     if (gameid.trim() !== "") {
       socket.emit("joinRoom", gameid);
+      socket.on("roomJoined", (msg) => {
+        setIdGenerate(msg);
+      });
       setErr(false);
-      setIdGenerate("You joined a room");
     } else {
       setErr(true);
     }

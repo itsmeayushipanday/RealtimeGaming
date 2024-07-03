@@ -46,10 +46,13 @@ io.on("connection", (socket) => {
     const rooms = io.of("/").adapter.rooms;
     const isRoomIdPresent = rooms.has(roomId);
 
-    if (isRoomIdPresent) {
+    if (isRoomIdPresent && rooms.get(roomId).size === 1) {
       socket.join(roomId);
+      socket.emit("roomJoined", "Joined a Room");
+    } else if (isRoomIdPresent && rooms.get(roomId).size > 1) {
+      socket.emit("roomJoined", "Room is Full!");
     } else {
-      console.log("No such room exits");
+      socket.emit("roomJoined", "No such room exits");
     }
 
     console.log(rooms);
