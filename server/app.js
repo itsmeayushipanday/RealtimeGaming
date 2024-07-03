@@ -55,7 +55,9 @@ io.on("connection", (socket) => {
       socket.emit("roomJoined", "No such room exits");
     }
 
-    console.log(rooms);
+    if (isRoomIdPresent && rooms.get(roomId).size === 2) {
+      io.to(roomId).emit("readyForGame", "Now you can play the game");
+    }
   });
 
   socket.on("disconnect", () => {

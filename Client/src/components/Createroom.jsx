@@ -12,6 +12,9 @@ const Createroom = () => {
   useEffect(() => {
     //ESTABLISHING A SOCKET CONNECTION
     const socket = io("http://localhost:3000/");
+    socket.on("readyForGame", (msg) => {
+      console.log(msg);
+    });
     setSocket(socket);
   }, []);
 
