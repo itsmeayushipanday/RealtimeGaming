@@ -4,11 +4,16 @@ import App from "./App.jsx";
 import "./index.css";
 import Createroom from "./components/Createroom.jsx";
 import Joinroom from "./components/Joinroom.jsx";
+import Board from "./components/Board";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/board",
+    element: <Board />,
   },
   {
     path: "/createRoom",
