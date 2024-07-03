@@ -27,6 +27,7 @@ const Board = () => {
       setSquares(squares);
       setXIsNext(true);
       setGameStarted(false);
+      setTurn(room[0]);
     });
 
     socket.emit("getCurrentRoom", roomId);
