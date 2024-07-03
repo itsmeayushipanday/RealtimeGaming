@@ -6,6 +6,8 @@ import Createroom from "./components/Createroom.jsx";
 import Joinroom from "./components/Joinroom.jsx";
 import Board from "./components/Board";
 
+import { SocketProvider } from "./contexts/SocketContext.jsx";
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,5 +28,7 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <RouterProvider router={router} />
+  <SocketProvider>
+    <RouterProvider router={router} />
+  </SocketProvider>
 );

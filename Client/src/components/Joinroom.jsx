@@ -1,24 +1,20 @@
-import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSocket } from "../contexts/SocketContext";
 
 const Joinroom = () => {
   const [gameid, setGameid] = useState("");
   const [err, setErr] = useState(false);
   const [idGenerate, setIdGenerate] = useState("");
-  const [socket, setSocket] = useState("");
 
   const navigate = useNavigate();
+  const socket = useSocket();
 
-  useEffect(() => {
-    const socket = io("http://localhost:3000/");
-    socket.on("readyForGame", (roomId) => {
-      navigate("/board/" + roomId);
-    });
-    setSocket(socket);
-  }, []);
+  socket.on("readyForGame", (roomId) => {
+    navigate("/board/" + roomId);
+  });
 
   const submitHandler = (e) => {
     e.preventDefault();

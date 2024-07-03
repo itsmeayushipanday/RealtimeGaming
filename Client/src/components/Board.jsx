@@ -1,14 +1,22 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Square from "./Square";
 import { useParams } from "react-router-dom";
+import { io } from "socket.io-client";
+import { useSocket } from "../contexts/SocketContext";
 
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [gameStarted, setGameStarted] = useState(false); // game not started yet
+  const socket = useSocket();
 
   const { roomId } = useParams();
+
+  useEffect(() => {
+    console.log(roomId);
+    console.log(socket);
+  });
 
   function calculateWinner(squares) {
     const lines = [
