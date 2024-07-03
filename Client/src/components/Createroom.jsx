@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
 
 const Createroom = () => {
   const [id, setId] = useState("");
@@ -9,11 +10,14 @@ const Createroom = () => {
   const [error, setError] = useState(false);
   const [socket, setSocket] = useState();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     //ESTABLISHING A SOCKET CONNECTION
     const socket = io("http://localhost:3000/");
     socket.on("readyForGame", (msg) => {
       console.log(msg);
+      navigate("/board");
     });
     setSocket(socket);
   }, []);

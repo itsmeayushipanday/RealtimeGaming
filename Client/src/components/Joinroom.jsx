@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
+import { useNavigate } from "react-router-dom";
 
 const Joinroom = () => {
   const [gameid, setGameid] = useState("");
@@ -9,10 +10,13 @@ const Joinroom = () => {
   const [idGenerate, setIdGenerate] = useState("");
   const [socket, setSocket] = useState("");
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     const socket = io("http://localhost:3000/");
     socket.on("readyForGame", (msg) => {
       console.log(msg);
+      navigate("/board");
     });
     setSocket(socket);
   }, []);
