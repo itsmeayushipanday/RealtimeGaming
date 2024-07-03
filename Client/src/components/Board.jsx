@@ -10,21 +10,30 @@ const Board = () => {
   const [xIsNext, setXIsNext] = useState(true);
   const [gameStarted, setGameStarted] = useState(false); // game not started yet
   const [turn, setTurn] = useState(null);
+  const [room, setRoom] = useState([]);
   const socket = useSocket();
 
   const { roomId } = useParams();
 
   useEffect(() => {
-    socket.on("newStates", ({ newSquares, xIsNext }) => {
+    socket.on("newStates", ({ newSquares, xIsNext, turn }) => {
       setSquares(newSquares);
       setXIsNext(!xIsNext);
       setGameStarted(true);
+      setTurn(turn === room[0] ? room[1] : room[0]);
     });
 
     socket.on("gameRestarted", ({ squares }) => {
       setSquares(squares);
       setXIsNext(true);
       setGameStarted(false);
+    });
+
+    socket.emit("getCurrentRoom", roomId);
+
+    socket.on("currentRoom", (room) => {
+      setRoom(room);
+      setTurn(room[0]);
     });
   }, []);
 
@@ -59,6 +68,10 @@ const Board = () => {
   const isBoardFull = squares.every((square) => square !== null); //checks if each square is full
 
   function handleClick(i) {
+    if (turn !== socket.id) {
+      console.log("returning from here");
+      return;
+    }
     if (squares[i] || calculateWinner(squares)) return; //means either block is already filled or winner is declared
     const nextSquares = squares.slice(); //creates shallow copy of array
     if (xIsNext) {
@@ -71,6 +84,7 @@ const Board = () => {
       roomId: roomId,
       squares: nextSquares,
       xIsNext: xIsNext,
+      turn: turn,
     });
   }
 

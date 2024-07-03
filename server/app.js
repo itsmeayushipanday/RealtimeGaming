@@ -61,9 +61,11 @@ io.on("connection", (socket) => {
   });
 
   socket.on("PlayingGame", (msg) => {
+    console.log(msg);
     io.to(msg.roomId).emit("newStates", {
       newSquares: msg.squares,
       xIsNext: msg.xIsNext,
+      turn: msg.turn,
     });
   });
 
@@ -71,6 +73,13 @@ io.on("connection", (socket) => {
     io.to(roomId).emit("gameRestarted", {
       squares: squares,
     });
+  });
+
+  socket.on("getCurrentRoom", (roomId) => {
+    const rooms = io.of("/").adapter.rooms;
+    const room = rooms.get(roomId);
+    const roomArray = Array.from(room);
+    socket.emit("currentRoom", roomArray);
   });
 
   socket.on("disconnect", () => {
