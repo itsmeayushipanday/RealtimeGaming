@@ -60,6 +60,19 @@ io.on("connection", (socket) => {
     }
   });
 
+  socket.on("PlayingGame", (msg) => {
+    io.to(msg.roomId).emit("newStates", {
+      newSquares: msg.squares,
+      xIsNext: msg.xIsNext,
+    });
+  });
+
+  socket.on("restartGame", ({ roomId, squares }) => {
+    io.to(roomId).emit("gameRestarted", {
+      squares: squares,
+    });
+  });
+
   socket.on("disconnect", () => {
     console.log("Client disconnected:", socket.id);
   });

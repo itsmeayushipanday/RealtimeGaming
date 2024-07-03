@@ -9,14 +9,24 @@ const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const [gameStarted, setGameStarted] = useState(false); // game not started yet
+  const [turn, setTurn] = useState(null);
   const socket = useSocket();
 
   const { roomId } = useParams();
 
   useEffect(() => {
-    console.log(roomId);
-    console.log(socket);
-  });
+    socket.on("newStates", ({ newSquares, xIsNext }) => {
+      setSquares(newSquares);
+      setXIsNext(!xIsNext);
+      setGameStarted(true);
+    });
+
+    socket.on("gameRestarted", ({ squares }) => {
+      setSquares(squares);
+      setXIsNext(true);
+      setGameStarted(false);
+    });
+  }, []);
 
   function calculateWinner(squares) {
     const lines = [
@@ -56,15 +66,19 @@ const Board = () => {
     } else {
       nextSquares[i] = "O";
     }
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
-    setGameStarted(true);
+
+    socket.emit("PlayingGame", {
+      roomId: roomId,
+      squares: nextSquares,
+      xIsNext: xIsNext,
+    });
   }
 
   const resetHandler = () => {
-    setSquares(Array(9).fill(null));
-    setXIsNext(true);
-    setGameStarted(false); // game started again
+    socket.emit("restartGame", {
+      roomId: roomId,
+      squares: Array(9).fill(null),
+    });
   };
 
   return (
