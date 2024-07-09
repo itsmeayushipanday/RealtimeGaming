@@ -139,7 +139,7 @@ const Board = () => {
             Winner is Player : {winner}
           </button>
         )}
-        {isBoardFull && (
+        {isBoardFull && !winner && (
           <div className="text-2xl px-8 py-4 rounded-tl-2xl rounded-br-2xl font-serif text-white inline-block mb-4 bg-customOrange hover:bg-[#ffaf10]">
             Game Draw
           </div>
