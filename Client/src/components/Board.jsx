@@ -1,14 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import Square from "./Square";
 import { useParams } from "react-router-dom";
-import { io } from "socket.io-client";
 import { useSocket } from "../contexts/SocketContext";
+import Square from "./Square";
 
 const Board = () => {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
-  const [gameStarted, setGameStarted] = useState(false); // game not started yet
+  const [gameStarted, setGameStarted] = useState(false);
   const [turn, setTurn] = useState(null);
   const [room, setRoom] = useState([]);
   const socket = useSocket();
