@@ -83,6 +83,11 @@ const Joinroom = () => {
         >
           Join Room
         </button>
+
+        {/* FOR SHOWING ERROR (NO SUCH ROOM EXISTS or ROOM IS FULL)  */}
+        {idGenerate && gameid && (
+          <p className="mt-4 text-white font-serif">{idGenerate}</p>
+        )}
       </div>
     </div>
   );

@@ -35,7 +35,7 @@ const Board = () => {
       setRoom(room);
       setTurn(room[0]);
     });
-  }, []);
+  }, [room, roomId, socket]);
 
   function calculateWinner(squares) {
     const lines = [
