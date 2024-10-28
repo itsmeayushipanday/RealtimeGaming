@@ -1,11 +1,12 @@
-//import Home from "./components/Home";
+import Home from "./components/Home";
 import LoginSign from "./components/LoginSign";
 import "./styles.css";
 
 function App() {
   return (
     <div>
-      <LoginSign />
+      {/* <LoginSign /> */}
+      <Home />
     </div>
   );
 }
