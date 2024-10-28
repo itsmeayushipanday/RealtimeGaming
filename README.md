@@ -43,3 +43,11 @@ To run this project locally, follow these steps:
    ``` npm install ```
 8. Run the backend development server:
    ```node app.js```
+
+## Screenshots of the application: 
+![image](https://github.com/user-attachments/assets/2f16e265-5c29-48cd-8439-0554bf87aebc)
+![image](https://github.com/user-attachments/assets/5e02e359-727f-4294-bd5a-ead2910a1dc2)
+![image](https://github.com/user-attachments/assets/569391af-3bf1-47bb-9915-c94234331e55)
+![image](https://github.com/user-attachments/assets/fd94629a-d5b5-4b4f-bda1-d83e5ea6c610)
+
+
