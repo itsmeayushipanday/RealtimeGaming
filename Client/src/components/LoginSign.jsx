@@ -1,3 +1,5 @@
+import "./Login.css";
+
 const LoginSign = () => {
   return (
     <div className="main">
